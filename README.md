@@ -1,9 +1,9 @@
-# Zk0 Validator Set Project
+# zkcard precompile and wasm test example
 
 ```shell
 REPORT_GAS=true
-yarn compile
-yarn test
-yarn start
-yarn deploy:dev
+yarn && make
+yarn mt:dev
+or
+yarn mt:test
 ```

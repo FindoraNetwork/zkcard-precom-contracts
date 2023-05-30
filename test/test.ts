@@ -13,11 +13,11 @@ describe("MentalPokerTest", function () {
     const mentalPoker = await MentalPoker.deploy();
     await mentalPoker.deployed();
     console.log("MentalPoker deployed to ", mentalPoker.address);
-  
+
     const MentalPokerTest = await ethers.getContractFactory("MentalPokerTest");
     const mentalPokerTest = await MentalPokerTest.deploy(mentalPoker.address);
     await mentalPokerTest.deployed();
-  
+
     console.log("MentalPokerTest deployed to ", mentalPokerTest.address);
 
     return { mentalPokerTest };
@@ -26,13 +26,24 @@ describe("MentalPokerTest", function () {
   describe("MentalPoker Contract Test", function () {
     it("Should set output right", async function () {
       const { mentalPokerTest } = await loadFixture(deployOneYearLockFixture);
-      expect(await mentalPokerTest.verifyKeyOwnership("0x", "0x", "0x", "0x")).to.eql(true);
-      expect(ethers.utils.toUtf8String(await mentalPokerTest.computeAggregateKey([]))).to.eql("call computeAggregateKey");
-      expect(ethers.utils.toUtf8String(await mentalPokerTest.mask("0x", "0x", "0x"))).to.eql("call mask");
-      expect(await mentalPokerTest.verifyShuffle("0x", "0x", [], [], "0x")).to.eql(true);
-      expect(await mentalPokerTest.verifyReveal("0x", "0x", "0x", "0x", "0x")).to.eql(true);
-      expect(ethers.utils.toUtf8String(await mentalPokerTest.reveal([], "0x"))).to.eql("call reveal");
+      expect(
+        await mentalPokerTest.verifyKeyOwnership("0x", "0x", "0x", "0x")
+      ).to.eql(true);
+      expect(
+        ethers.utils.toUtf8String(await mentalPokerTest.computeAggregateKey([]))
+      ).to.eql("call computeAggregateKey");
+      expect(
+        ethers.utils.toUtf8String(await mentalPokerTest.mask("0x", "0x", "0x"))
+      ).to.eql("call mask");
+      expect(
+        await mentalPokerTest.verifyShuffle("0x", "0x", [], [], "0x")
+      ).to.eql(true);
+      expect(
+        await mentalPokerTest.verifyReveal("0x", "0x", "0x", "0x", "0x")
+      ).to.eql(true);
+      expect(
+        ethers.utils.toUtf8String(await mentalPokerTest.reveal([], "0x"))
+      ).to.eql("call reveal");
     });
-
   });
 });
