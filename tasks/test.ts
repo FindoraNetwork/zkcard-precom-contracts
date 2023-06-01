@@ -10,13 +10,12 @@ import {
   computeRevealToken,
   CardRand,
   MaskedCard,
-  RevealToken,
   VRevealToken,
   reveal,
   Permutation,
   VMaskedCard,
   shuffleAndRemask,
-  PublicKey,
+  AggregatePublicKey,
 } from "../pkg/zkcard_wasm_rs";
 
 task("mt", "Mental Poker Test")
@@ -159,12 +158,13 @@ async function pctest(args: { contr: string }, hre: HardhatRuntimeEnvironment) {
       let pub_keys = [];
       for (let i = 0; i < num_of_players; i++) {
         let gameKeyAndProof = keygen(rand, parameters, "Alice");
+        let pubkey = gameKeyAndProof.getPubKey();
         pub_keys.push(
-          Buffer.from(gameKeyAndProof.getPubKey().serialAndEnbase64(), "base64")
+          Buffer.from(pubkey.serialAndEnbase64(), "base64")
         );
       }
 
-      let aggregate_key = PublicKey.debase64AndDeserial(
+      let aggregate_key = AggregatePublicKey.debase64AndDeserial(
         ethers.utils.toUtf8String(await myContr.computeAggregateKey(pub_keys))
       );
 
