@@ -159,9 +159,7 @@ async function pctest(args: { contr: string }, hre: HardhatRuntimeEnvironment) {
       for (let i = 0; i < num_of_players; i++) {
         let gameKeyAndProof = keygen(rand, parameters, "Alice");
         let pubkey = gameKeyAndProof.getPubKey();
-        pub_keys.push(
-          Buffer.from(pubkey.serialAndEnbase64(), "base64")
-        );
+        pub_keys.push(Buffer.from(pubkey.serialAndEnbase64(), "base64"));
       }
 
       let aggregate_key = AggregatePublicKey.debase64AndDeserial(
@@ -191,14 +189,10 @@ async function pctest(args: { contr: string }, hre: HardhatRuntimeEnvironment) {
       let shuffledDecks = maskedCardsAndShuffleProof.getMaskedCards();
       let shuffleProof = maskedCardsAndShuffleProof.getShuffleProof();
 
-      let new_decks = [];
-      let count = shuffledDecks.len();
-      for (let i = 0; i < count; i++) {
-        let shuffled_deck = shuffledDecks.pop();
-        new_decks.push(
-          Buffer.from(shuffled_deck.serialAndEnbase64(), "base64")
-        );
-      }
+      let new_decks = shuffledDecks
+        .serialAndEnbase64()
+        .map((v) => Buffer.from(v, "base64"));
+
       let params = Buffer.from(parameters.serialAndEnbase64(), "base64");
       let shared_key = Buffer.from(aggregate_key.serialAndEnbase64(), "base64");
       let shuffle_proof = Buffer.from(

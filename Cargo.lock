@@ -857,7 +857,7 @@ dependencies = [
 [[package]]
 name = "zkcard_wasm"
 version = "0.1.0"
-source = "git+https://github.com/FindoraNetwork/zkcard-mini-sdk.git#4362cb145f63c0846ae42c14dd020fb5109d1e8c"
+source = "git+https://github.com/FindoraNetwork/zkcard-mini-sdk.git#7e64715ddb6f01321eb0609207656c75ab92eab5"
 dependencies = [
  "ark-bn254",
  "ark-ec",
