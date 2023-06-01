@@ -192,7 +192,6 @@ async function pctest(args: { contr: string }, hre: HardhatRuntimeEnvironment) {
       let shuffleProof = maskedCardsAndShuffleProof.getShuffleProof();
 
       let new_decks = [];
-      shuffledDecks.reverse();
       let count = shuffledDecks.len();
       for (let i = 0; i < count; i++) {
         let shuffled_deck = shuffledDecks.pop();
